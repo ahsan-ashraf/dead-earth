@@ -8,12 +8,14 @@ public class NavAgentExample : MonoBehaviour {
 
     #region Public Variables
 
-    public AIWayPointNetwork   WayPointNetwork      = null;
-    public int                 CurrentWayPointIndex = 0;
-    public bool                HasPath              = false;
-    public bool                PathPending          = false;
-    public bool                PathStale            = false;
-    public NavMeshPathStatus   PathStatus           = NavMeshPathStatus.PathInvalid;
+    public AIWayPointNetwork    WayPointNetwork      = null;
+    public int                  CurrentWayPointIndex = 0;
+    public bool                 HasPath              = false;
+    public bool                 PathPending          = false;
+    public bool                 PathStale            = false;
+    public float                RemainingDistance    = 0.0f;
+    public NavMeshPathStatus    PathStatus           = NavMeshPathStatus.PathInvalid;
+    public AnimationCurve       JumpCurve            = new AnimationCurve();
 
     #endregion
     #region Private Variables
@@ -31,12 +33,18 @@ public class NavAgentExample : MonoBehaviour {
         SetNextDestination(false);
     }
     private void Update() {
-        HasPath     = NavAgent.hasPath;
-        PathPending = NavAgent.pathPending;
-        PathStale   = NavAgent.isPathStale;
-        PathStatus  = NavAgent.pathStatus;
+        HasPath             = NavAgent.hasPath;
+        PathPending         = NavAgent.pathPending;
+        PathStale           = NavAgent.isPathStale;
+        PathStatus          = NavAgent.pathStatus;
+        RemainingDistance   = NavAgent.remainingDistance;
 
-        if ((!HasPath && !PathPending) || PathStatus == NavMeshPathStatus.PathInvalid || PathStatus == NavMeshPathStatus.PathPartial) {
+        if (NavAgent.isOnOffMeshLink) {
+            StartCoroutine(Jump(1.0f));
+            return;
+        }
+
+        if ((RemainingDistance <= NavAgent.stoppingDistance && !PathPending) || PathStatus == NavMeshPathStatus.PathInvalid || PathStatus == NavMeshPathStatus.PathPartial) {
             SetNextDestination(true);
         } else if (NavAgent.isPathStale) {
             SetNextDestination(false);
@@ -61,6 +69,21 @@ public class NavAgentExample : MonoBehaviour {
 
         CurrentWayPointIndex += 1;
     }
+    private IEnumerator Jump(float duration) {
+        OffMeshLinkData linkData    =   NavAgent.currentOffMeshLinkData;
+        Vector3         startpos    =   NavAgent.transform.position;
+        Vector3         endPos      =   linkData.endPos + NavAgent.baseOffset * Vector3.up;
+        float           time        =   0.0f;
+
+        while (time <= duration) {
+            float t = time / duration;
+            NavAgent.transform.position = Vector3.Lerp(startpos, endPos, t) + JumpCurve.Evaluate(t) * Vector3.up;
+            time += Time.deltaTime;
+            yield return null;
+        }
+        NavAgent.CompleteOffMeshLink();
+    }
 
     #endregion
+
 }
