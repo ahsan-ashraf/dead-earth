@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Dead Earth\Scripts\AIWayPointNetwork.cs" />
+    <Compile Include="Assets\Navigation Example\NavAgentExample.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/ahsan/Desktop/dead-earth/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
