@@ -33262,20 +33262,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1210031775}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &439940102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439940099}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166bfa59be29214a94152ec736e5958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 0
---- !u!114 &439940103
+--- !u!114 &439940100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33284,9 +33271,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 439940099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b216cfd0ddf08e488314cc69feb9cfd, type: 3}
+  m_Script: {fileID: 11500000, guid: a3193a8241180fa41a2df0334af5dc87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WayPointNetwork: {fileID: 1279617578}
+  CurrentWayPointIndex: 0
+  HasPath: 0
+  PathPending: 0
+  PathStale: 0
+  RemainingDistance: 0
+  PathStatus: 2
+  JumpCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!195 &439940101
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439940099}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 5.6
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &483144288
 GameObject:
   m_ObjectHideFlags: 0
@@ -33676,6 +33698,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 0f7d85c3dd9bc6042878017fffe2cbb7, type: 2}
+    - target: {fileID: -6057140222963153312, guid: 2087e0b21e4973c4ab08c66e7a8229e2,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2087e0b21e4973c4ab08c66e7a8229e2, type: 3}
 --- !u!1 &1249634678
