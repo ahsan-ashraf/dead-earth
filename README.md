@@ -1,5 +1,5 @@
 # Dead Earth
-A first person shooting survivor shooting game.
+A first person survivor shooting game.
 ## Functionalities Implemented
     -Basic Scene is setted up.
     -Path finding nav mesh agent is implemented.

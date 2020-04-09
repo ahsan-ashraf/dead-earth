@@ -63,6 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Dead Earth\Scripts\AIWayPointNetwork.cs" />
+    <Compile Include="Assets\Dead Earth\Scripts\Controller_Test.cs" />
+    <Compile Include="Assets\Dead Earth\Scripts\SmoothCameraMount_Test.cs" />
+    <Compile Include="Assets\Dead Earth\Scripts\SpeedController_Test.cs" />
     <Compile Include="Assets\Navigation Example\NavAgentExample.cs" />
     <Compile Include="Assets\Navigation Example\SlidingDoorExample.cs" />
     <Reference Include="Unity.Timeline.Editor">
