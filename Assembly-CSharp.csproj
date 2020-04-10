@@ -68,6 +68,7 @@
     <Compile Include="Assets\Dead Earth\Scripts\SpeedController_Test.cs" />
     <Compile Include="Assets\Navigation Example\NavAgentExample.cs" />
     <Compile Include="Assets\Navigation Example\NavAgentNoRootMotionExample.cs" />
+    <Compile Include="Assets\Navigation Example\NavAgentRootMotionExample.cs" />
     <Compile Include="Assets\Navigation Example\SlidingDoorExample.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/ahsan/Desktop/dead-earth/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

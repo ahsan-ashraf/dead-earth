@@ -56,20 +56,17 @@ public class NavAgentNoRootMotionExample : MonoBehaviour {
         float horizontal = cross.y < 0 ? -cross.magnitude : cross.magnitude;
         horizontal = Mathf.Clamp(horizontal * 2.32f, -2.32f, +2.32f);
 
-        //float vertical = NavAgent.desiredVelocity.magnitude;
-        Debug.Log((NavAgent.desiredVelocity.magnitude < 3.0f) + ": " + NavAgent.desiredVelocity.magnitude + " && "+ (Vector3.Angle(transform.forward, NavAgent.desiredVelocity) > 2.0f) + ": " + (Vector3.Angle(transform.forward, NavAgent.desiredVelocity)));
-        if (NavAgent.desiredVelocity.magnitude < 3.0f && Vector3.Angle(transform.forward, NavAgent.desiredVelocity) > 2.0f) {
+        float vertical = NavAgent.desiredVelocity.magnitude;
+        if (NavAgent.desiredVelocity.magnitude < 1.0f && Vector3.Angle(transform.forward, NavAgent.desiredVelocity) > 10.0f) {
             NavAgent.speed  = 0.1f;
             turnOnSpot      = (int)Mathf.Sign(horizontal);
-            Debug.Log(Vector3.Angle(transform.forward, NavAgent.desiredVelocity));
         } else {
             NavAgent.speed = OriginalMaxSpeed;
             turnOnSpot = 0;
-            Debug.Log("Resetted because of: " + (NavAgent.desiredVelocity.magnitude < 3.0f) + ": " + NavAgent.desiredVelocity.magnitude + " && " + (Vector3.Angle(transform.forward, NavAgent.desiredVelocity) > 2.0f) + ": " + (Vector3.Angle(transform.forward, NavAgent.desiredVelocity)));
         }
 
         Animator.SetFloat("Horizontal", horizontal, 0.1f, Time.deltaTime);
-        Animator.SetFloat("Vertical", /*vertical*/NavAgent.desiredVelocity.magnitude, 0.1f, Time.deltaTime);
+        Animator.SetFloat("Vertical", vertical, 0.1f, Time.deltaTime);
         Animator.SetInteger("TurnOnSpot", turnOnSpot);
 
         /*
