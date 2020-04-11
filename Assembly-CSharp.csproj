@@ -62,14 +62,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Dead Earth\Scripts\AIWayPointNetwork.cs" />
-    <Compile Include="Assets\Dead Earth\Scripts\Controller_Test.cs" />
-    <Compile Include="Assets\Dead Earth\Scripts\SmoothCameraMount_Test.cs" />
-    <Compile Include="Assets\Dead Earth\Scripts\SpeedController_Test.cs" />
+    <Compile Include="Assets\Dead Earth\Scripts\AI\AIState.cs" />
+    <Compile Include="Assets\Dead Earth\Scripts\AI\AIStateMachine.cs" />
+    <Compile Include="Assets\Dead Earth\Scripts\AI\AIWayPointNetwork.cs" />
+    <Compile Include="Assets\Dead Earth\Scripts\AI\AIZombieStateMachine.cs" />
+    <Compile Include="Assets\Dead Earth\Scripts\GameSceneManager.cs" />
+    <Compile Include="Assets\Navigation Example\Controller_Test.cs" />
     <Compile Include="Assets\Navigation Example\NavAgentExample.cs" />
     <Compile Include="Assets\Navigation Example\NavAgentNoRootMotionExample.cs" />
     <Compile Include="Assets\Navigation Example\NavAgentRootMotionExample.cs" />
     <Compile Include="Assets\Navigation Example\SlidingDoorExample.cs" />
+    <Compile Include="Assets\Navigation Example\SmoothCameraMount_Test.cs" />
+    <Compile Include="Assets\Navigation Example\SpeedController_Test.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/ahsan/Desktop/dead-earth/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
