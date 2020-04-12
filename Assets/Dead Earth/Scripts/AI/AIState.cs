@@ -9,12 +9,17 @@ public abstract class AIState : MonoBehaviour {
     public abstract AIStateType GetStateType();
     public abstract AIStateType OnUpdate();
 
-    public virtual void OnEnterState()      { }
-    public virtual void OnExitState()       { }
-    public virtual void OnAnimatorUpdated() { }
-    public virtual void OnTriggerEvent(AITriggerEvent eventType, Collider other) { }
+    public virtual void OnEnterState()          { }
+    public virtual void OnExitState()           { }
+    public virtual void OnAnimatorUpdated()     { }
+    public virtual void OnAnimatorIKUpdated()   { }
+    public virtual void OnTriggerEvent(AITriggerEventType eventType, Collider other) { }
     public virtual void OnDestinationReached(bool isReached) { }
 
+    /// <summary>
+    /// Sets StateMachine reference variable to the provided AIStateMachine.
+    /// </summary>
+    /// <param name="stateMachine"></param>
     public void SetStateMachine(AIStateMachine stateMachine) {
         StateMachine = stateMachine;
     }
