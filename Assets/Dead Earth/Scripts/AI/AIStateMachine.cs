@@ -53,9 +53,9 @@ public abstract class AIStateMachine : MonoBehaviour {
 
     [SerializeField] [Range(0.0f, 15f)] protected float     StoppingDistance = 1.0f;
 
-    protected   Animator        Animator    = null;
-    protected   NavMeshAgent    NavAgent    = null;
-    protected   Collider        Collider    = null;
+    private   Animator        Animator    = null;
+    private   NavMeshAgent    NavAgent    = null;
+    private   Collider        Collider    = null;
     //protected   Transform       Transform   = null;
 
     public Animator animator {
@@ -72,6 +72,14 @@ public abstract class AIStateMachine : MonoBehaviour {
         }
         private set {
             NavAgent = value;
+        }
+    }
+    public Collider _collider {
+        get {
+            return Collider;
+        }
+        private set {
+            Collider = value;
         }
     }
     public bool useRootPosition {
@@ -110,7 +118,7 @@ public abstract class AIStateMachine : MonoBehaviour {
         // Referencing Components
         animator    = GetComponent<Animator>();
         navAgent    = GetComponent<NavMeshAgent>();
-        Collider    = GetComponent<Collider>();
+        _collider    = GetComponent<Collider>();
 
         // Register State Machines to GameSceneManager
         if (Collider != null)       GameSceneManager.Instance.RegisterStateMachine(Collider.GetInstanceID(), this);

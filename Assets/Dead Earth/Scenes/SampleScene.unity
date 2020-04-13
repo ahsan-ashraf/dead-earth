@@ -38227,6 +38227,13 @@ MonoBehaviour:
   TargetTrigger: {fileID: 374132115}
   SensorTrigger: {fileID: 982904965}
   StoppingDistance: 1
+  FOV: 50
+  Sight: 50
+  Hearing: 1
+  Aggression: 0.5
+  Intelligence: 0.5
+  Satisfaction: 1
+  Health: 100
 --- !u!4 &8471817551989373335
 Transform:
   m_ObjectHideFlags: 0
