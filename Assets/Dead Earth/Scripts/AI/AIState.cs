@@ -50,7 +50,33 @@ public abstract class AIState : MonoBehaviour {
     /// Sets StateMachine reference variable to the provided AIStateMachine.
     /// </summary>
     /// <param name="stateMachine"></param>
-    public void SetStateMachine(AIStateMachine stateMachine) {
+    public virtual void SetStateMachine(AIStateMachine stateMachine) {
         StateMachine = stateMachine;
+    }
+    /// <summary>
+    /// Converts the provided sphere collider's position into 
+    /// world space taking into account the hierarchical scaling.
+    /// </summary>
+    /// <param name="collider"></param>
+    /// <param name="position"></param>
+    /// <param name="radius"></param>
+    public static void ConvertSphereColliderToWorldSpace(SphereCollider collider, out Vector3 position, out float radius) {
+        // Default Values
+        position = Vector3.zero;
+        radius = 0.0f;
+
+        // If invalid collider
+        if (collider == null)   return;
+
+        // Calculate world space position of sphere collider.
+        position    = collider.transform.position;
+        position.x += collider.center.x * collider.transform.lossyScale.x;
+        position.y += collider.center.y * collider.transform.lossyScale.y;
+        position.z += collider.center.z * collider.transform.lossyScale.z;
+
+        // Calculate world space radius of sphere collider.
+        radius = Mathf.Max(collider.radius * collider.transform.lossyScale.x,
+                           collider.radius * collider.transform.lossyScale.y,
+                           collider.radius * collider.transform.lossyScale.z);
     }
 }

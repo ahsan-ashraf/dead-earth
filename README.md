@@ -5,3 +5,4 @@ A first person survivor shooting game.
     -Path finding nav mesh agent is implemented for Test/Understanding.
     -Nav Mesh Obstacles and Off Mesh Links and custom Off Mesh Links are implemented for Test/Understanding.
     -Sliding door is implemented for Test/Understanding.
+    -Zombie's functionality to detect Player as a visual terget and detectign other audio and food targets.
