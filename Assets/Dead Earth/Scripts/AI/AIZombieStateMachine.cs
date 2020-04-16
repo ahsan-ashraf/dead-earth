@@ -21,6 +21,7 @@ public class AIZombieStateMachine : AIStateMachine {
     private bool    Feeding     = false;
     private bool    Crawling    = false;
     private int     AttackType  = 0;
+    private float   Speed       = 0.0f;
     
     // Hashes.
     private int SpeedHash   = Animator.StringToHash("Speed");
@@ -34,13 +35,13 @@ public class AIZombieStateMachine : AIStateMachine {
     public float    hearing         { get { return Hearing; } }
     public bool     crawling        { get { return Crawling; } }
     public float    intelligence    { get { return Intelligence; } }
-    public float    aggression      { get { return Aggression; }                                set { Aggression    = value; } }
-    public float    satisfaction    { get { return Satisfaction; }                              set { Satisfaction  = value; } }
-    public int      health          { get { return Health; }                                    set { Health        = value; } }
-    public int      seeking         { get { return Seeking; }                                   set { Seeking       = value; } }
-    public bool     feeding         { get { return Feeding; }                                   set { Feeding       = value; } }
-    public int      attackType      { get { return AttackType; }                                set { AttackType    = value; } }
-    public float    speed           { get { return navAgent != null ? navAgent.speed : 0.0f; }  set { if (navAgent != null) navAgent.speed = value; } }
+    public float    aggression      { get { return Aggression; }        set { Aggression    = value; } }
+    public float    satisfaction    { get { return Satisfaction; }      set { Satisfaction  = value; } }
+    public int      health          { get { return Health; }            set { Health        = value; } }
+    public int      seeking         { get { return Seeking; }           set { Seeking       = value; } }
+    public bool     feeding         { get { return Feeding; }           set { Feeding       = value; } }
+    public int      attackType      { get { return AttackType; }        set { AttackType    = value; } }
+    public float    speed           { get { return Speed; } set { Speed = value; } }
 
     /// <summary>
     /// MonoBehaviour Callback: called once per frame.

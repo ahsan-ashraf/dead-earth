@@ -6278,7 +6278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148789117}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5000001, w: 0.49999994}
-  m_LocalPosition: {x: -13.08, y: 34.35, z: 20.3}
+  m_LocalPosition: {x: -13, y: 27, z: 20.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10699,7 +10699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mount: {fileID: 46717893}
-  Speed: 5
+  Speed: 2
 --- !u!1 &148789473
 GameObject:
   m_ObjectHideFlags: 0
@@ -33310,7 +33310,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5.6
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -38174,6 +38174,7 @@ GameObject:
   - component: {fileID: 8296172667976861591}
   - component: {fileID: 439940101}
   - component: {fileID: 8296172667976861593}
+  - component: {fileID: 8296172667976861594}
   m_Layer: 8
   m_Name: AI Entity
   m_TagString: Untagged
@@ -38234,6 +38235,19 @@ MonoBehaviour:
   Intelligence: 0.5
   Satisfaction: 1
   Health: 100
+--- !u!114 &8296172667976861594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296172667976861590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0367e9ed4fac243a7139b28514abaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IdleTimeRange: {x: 5, y: 10}
 --- !u!4 &8471817551989373335
 Transform:
   m_ObjectHideFlags: 0
