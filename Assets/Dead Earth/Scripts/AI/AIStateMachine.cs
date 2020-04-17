@@ -92,6 +92,16 @@ public abstract class AIStateMachine : MonoBehaviour {
             return (RootRotationRefCount > 0);
         }
     }
+    public AITargetType targetType {
+        get {
+            return (Target.type);
+        }
+    }
+    public Vector3 targetPosition {
+        get {
+            return Target.position;
+        }
+    }
     public Vector3 sensorPosition {
         get {
             if (SensorTrigger == null)  return (Vector3.zero);
@@ -118,11 +128,13 @@ public abstract class AIStateMachine : MonoBehaviour {
         // Referencing Components
         animator    = GetComponent<Animator>();
         navAgent    = GetComponent<NavMeshAgent>();
-        _collider    = GetComponent<Collider>();
+        _collider   = GetComponent<Collider>();
 
-        // Register State Machines to GameSceneManager
-        if (Collider != null)       GameSceneManager.Instance.RegisterStateMachine(Collider.GetInstanceID(), this);
-        if (SensorTrigger != null)  GameSceneManager.Instance.RegisterStateMachine(SensorTrigger.GetInstanceID(), this);
+        if (GameSceneManager.Instance != null) {
+            // Register State Machines to GameSceneManager
+            if (Collider != null)       GameSceneManager.Instance.RegisterStateMachine(Collider.GetInstanceID(), this);
+            if (SensorTrigger != null)  GameSceneManager.Instance.RegisterStateMachine(SensorTrigger.GetInstanceID(), this);
+        }
     }
     /// <summary>
     /// MonoBehaviour Callback: called once before first frame.
@@ -294,8 +306,15 @@ public abstract class AIStateMachine : MonoBehaviour {
             TargetTrigger.enabled = false;
         }
     }
+    /// <summary>
+    /// Called by our AISensor component when an AI Aggravator has entered/exited the sensor trigger.
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="other"></param>
     public virtual void OnTriggerEvent(AITriggerEventType type, Collider other) {
-        CurrentState.OnTriggerEvent(type, other);
+        if (CurrentState != null) {
+            CurrentState.OnTriggerEvent(type, other);
+        }
     }
     /// <summary>
     /// Updates the NavMeshAgent position and rotation controlls settings.
@@ -315,6 +334,6 @@ public abstract class AIStateMachine : MonoBehaviour {
     /// <param name="rootRotation"></param>
     public void AddRootMotionRequest(int rootPosition, int rootRotation) {
         RootPositionRefCount += rootPosition;
-        RootRotationRefCount += rootPosition;
+        RootRotationRefCount += rootRotation;
     }
 }

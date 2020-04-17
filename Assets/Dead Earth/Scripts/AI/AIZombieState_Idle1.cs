@@ -26,6 +26,7 @@ public class AIZombieState_Idle1 : AIZombieState {
         ZombieStateMachine.seeking      = 0;
         ZombieStateMachine.feeding      = false;
         ZombieStateMachine.attackType   = 0;
+
         ZombieStateMachine.ClearTarget();
     }
     /// <summary>

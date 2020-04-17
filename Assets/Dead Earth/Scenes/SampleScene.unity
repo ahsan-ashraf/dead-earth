@@ -33251,7 +33251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374132113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -8.06, y: 0.57, z: 0.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 894505900}
@@ -36612,7 +36612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8296172667976861590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.32, y: 0, z: -6.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4341065988527549157}
@@ -38175,6 +38175,7 @@ GameObject:
   - component: {fileID: 439940101}
   - component: {fileID: 8296172667976861593}
   - component: {fileID: 8296172667976861594}
+  - component: {fileID: 8296172667976861595}
   m_Layer: 8
   m_Name: AI Entity
   m_TagString: Untagged
@@ -38224,6 +38225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ebcf99def6c7e449825f757548b950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RootPositionRefCount: 0
+  RootRotationRefCount: 0
   CurrentStateType: 1
   TargetTrigger: {fileID: 374132115}
   SensorTrigger: {fileID: 982904965}
@@ -38248,6 +38251,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleTimeRange: {x: 5, y: 10}
+--- !u!114 &8296172667976861595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296172667976861590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb2d48b1fedd1747896d5645667a787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WayPointNetWrok: {fileID: 1279617578}
+  RandomPatrol: 0
+  CurrentWayPointIndex: 0
+  TurnOnSpotThreshold: 90
+  SlerpSpeed: 5
+  Speed: 2
 --- !u!4 &8471817551989373335
 Transform:
   m_ObjectHideFlags: 0

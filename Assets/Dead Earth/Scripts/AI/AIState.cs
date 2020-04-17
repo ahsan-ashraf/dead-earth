@@ -79,4 +79,20 @@ public abstract class AIState : MonoBehaviour {
                            collider.radius * collider.transform.lossyScale.y,
                            collider.radius * collider.transform.lossyScale.z);
     }
+    /// <summary>
+    /// Returns a signed angle between two provided vectors in Degrees.
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <returns></returns>
+    public static float FindSignedAngle(Vector3 from, Vector3 to) {
+        if (from == to) {
+            return (0.0f);
+        } else {
+            float angle = Vector3.Angle(from, to);
+            Vector3 cross = Vector3.Cross(from, to);
+            angle *= Mathf.Sign(cross.y);
+            return (angle);
+        }
+    }
 }
