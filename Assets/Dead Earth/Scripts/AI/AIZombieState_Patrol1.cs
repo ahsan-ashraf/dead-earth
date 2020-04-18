@@ -42,7 +42,7 @@ public class AIZombieState_Patrol1 : AIZombieState {
         // from the waypoint network and make this the new target and plot a path to it.
         if (ZombieStateMachine.targetType != AITargetType.WayPoint) {
             ZombieStateMachine.ClearTarget();   // Clear any previous target.
-
+            Debug.Log("target cleared");
             // Do we have a valid waypoint network.
             if (WayPointNetWrok != null && WayPointNetWrok.WayPoints.Count > 0) {
 

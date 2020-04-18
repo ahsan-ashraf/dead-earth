@@ -6,6 +6,7 @@ public class AIZombieState_Alerted1 : AIZombieState {
 
     [SerializeField] private float ThreatAngleThreshold     = 10.0f;
     [SerializeField] private float WayPointAngleThreshold   = 90.0f;
+
     [SerializeField] [Range(1.0f, 60.0f)] private float MaxDuration = 10.0f;
 
     private float Timer = 0.0f;
@@ -56,7 +57,8 @@ public class AIZombieState_Alerted1 : AIZombieState {
             }
             if (Random.value < ZombieStateMachine.intelligence) {
                 ZombieStateMachine.seeking = -(int)Mathf.Sign(angle);
-            } else {
+            }
+            else {
                 ZombieStateMachine.seeking = (int)Mathf.Sign(Random.Range(-1.0f, 1.0f));
             }
         } 

@@ -102,6 +102,16 @@ public abstract class AIStateMachine : MonoBehaviour {
             return Target.position;
         }
     }
+    public int targetColliderId {
+        get {
+            if (Target.collider != null) {
+                return (Target.collider.GetInstanceID());
+            } else {
+                return (-1);
+            }
+        }
+    }
+    public bool inMeleeRange { get; set; }
     public Vector3 sensorPosition {
         get {
             if (SensorTrigger == null)  return (Vector3.zero);
