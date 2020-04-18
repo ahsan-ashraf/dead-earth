@@ -67,6 +67,7 @@
     <Compile Include="Assets\Dead Earth\Scripts\AI\AIStateMachine.cs" />
     <Compile Include="Assets\Dead Earth\Scripts\AI\AIWayPointNetwork.cs" />
     <Compile Include="Assets\Dead Earth\Scripts\AI\AIZombieState.cs" />
+    <Compile Include="Assets\Dead Earth\Scripts\AI\AIZombieState_Alerted1.cs" />
     <Compile Include="Assets\Dead Earth\Scripts\AI\AIZombieState_Idle1.cs" />
     <Compile Include="Assets\Dead Earth\Scripts\AI\AIZombieState_Patrol1.cs" />
     <Compile Include="Assets\Dead Earth\Scripts\AI\AIZombieStateMachine.cs" />

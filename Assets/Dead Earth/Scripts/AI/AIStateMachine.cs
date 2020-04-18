@@ -201,7 +201,7 @@ public abstract class AIStateMachine : MonoBehaviour {
     /// <summary>
     /// MonoBehavior Callback: called by physics when the AI's Main collider enters its trigger. 
     /// This allows the child state to know when it has entered the sphere of influence of a 
-    /// waypoint or last signted player.
+    /// waypoint or last sighted player.
     /// </summary>
     /// <param name="other"></param>
     protected virtual void OnTriggerEnter(Collider other) {

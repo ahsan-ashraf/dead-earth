@@ -41,7 +41,7 @@ public class AIZombieStateMachine : AIStateMachine {
     public int      seeking         { get { return Seeking; }           set { Seeking       = value; } }
     public bool     feeding         { get { return Feeding; }           set { Feeding       = value; } }
     public int      attackType      { get { return AttackType; }        set { AttackType    = value; } }
-    public float    speed           { get { return Speed; } set { Speed = value; } }
+    public float    speed           { get { return Speed; }             set { Speed = value; } }
 
     /// <summary>
     /// MonoBehaviour Callback: called once per frame.

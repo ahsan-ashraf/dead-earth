@@ -11,9 +11,9 @@ public abstract class AIZombieState : AIState {
 
     private void Awake() {
         //PlayerLayerMask = LayerMask.GetMask("Player", "AI Body Part") + 1;
-        PlayerLayerMask = LayerMask.GetMask("Player", "AI Body Part", "Default");
-        PlayerLayerMask = LayerMask.GetMask("Player", "AI Body Part", "Default", "Visual Aggravator");
-        BodyPartLayerMask = LayerMask.NameToLayer("AI Body Part");
+        PlayerLayerMask     = LayerMask.GetMask("Player", "AI Body Part", "Default");
+        PlayerLayerMask     = LayerMask.GetMask("Player", "AI Body Part", "Default", "Visual Aggravator");
+        BodyPartLayerMask   = LayerMask.NameToLayer("AI Body Part");
     }
     public override void SetStateMachine(AIStateMachine stateMachine) {
         if (stateMachine.GetType() == typeof(AIZombieStateMachine)) {
@@ -22,8 +22,9 @@ public abstract class AIZombieState : AIState {
         }
     }
     public override void OnTriggerEvent(AITriggerEventType eventType, Collider other) {
-        if (ZombieStateMachine != null)   return;
-        
+        if (ZombieStateMachine == null) {
+            return;
+        }
         if (eventType != AITriggerEventType.Exit) {
             AITargetType currentTargetType = ZombieStateMachine.VisualThreat.type;
             
@@ -50,13 +51,14 @@ public abstract class AIZombieState : AIState {
             else 
             if (other.CompareTag("AI Sound Emitter")) {
                 SphereCollider soundTrigger = (SphereCollider)other;
-                if (soundTrigger == null) return;
-
+                if (soundTrigger == null) {
+                    return;
+                }
                 // Get Agent Sensor Position.
                 Vector3 agentSensorPosition = ZombieStateMachine.sensorPosition;
 
                 Vector3 soundPosition;
-                float soundRadius;
+                float   soundRadius;
                 AIState.ConvertSphereColliderToWorldSpace(soundTrigger, out soundPosition, out soundRadius);
 
                 // How far inside the sound's radius are we.
