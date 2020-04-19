@@ -16,6 +16,9 @@ public class AIZombieStateMachine : AIStateMachine {
     [SerializeField] [Range(0.0f, 1.0f)]    private float   Satisfaction    = 1.0f;
     [SerializeField] [Range(0, 100)]        private int     Health          = 100;
 
+    [SerializeField] private float ReplenishRate = 0.5f;
+    [SerializeField] private float DeplenishRate = 0.1f;
+
     // Private.
     private int     Seeking     = 0;
     private bool    Feeding     = false;
@@ -35,13 +38,14 @@ public class AIZombieStateMachine : AIStateMachine {
     public float    hearing         { get { return Hearing; } }
     public bool     crawling        { get { return Crawling; } }
     public float    intelligence    { get { return Intelligence; } }
-    public float    aggression      { get { return Aggression; }        set { Aggression    = value; } }
-    public float    satisfaction    { get { return Satisfaction; }      set { Satisfaction  = value; } }
-    public int      health          { get { return Health; }            set { Health        = value; } }
-    public int      seeking         { get { return Seeking; }           set { Seeking       = value; } }
-    public bool     feeding         { get { return Feeding; }           set { Feeding       = value; } }
-    public int      attackType      { get { return AttackType; }        set { AttackType    = value; } }
-    public float    speed           { get { return Speed; }             set { Speed = value; } }
+    public float    aggression      { get { return Aggression; }                set { Aggression    = value; } }
+    public float    satisfaction    { get { return Satisfaction; }              set { Satisfaction  = value; } }
+    public int      health          { get { return Health; }                    set { Health        = value; } }
+    public int      seeking         { get { return Seeking; }                   set { Seeking       = value; } }
+    public bool     feeding         { get { return Feeding; }                   set { Feeding       = value; } }
+    public int      attackType      { get { return AttackType; }                set { AttackType    = value; } }
+    public float    speed           { get { return Speed; }                     set { Speed         = value; } }
+    public float replenishRate      { get { return ReplenishRate; }     private set { ReplenishRate = value; } }
 
     /// <summary>
     /// MonoBehaviour Callback: called once per frame.

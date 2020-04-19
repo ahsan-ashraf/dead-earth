@@ -81,6 +81,7 @@ public class AIZombieState_Pursuit1 : AIZombieState {
         }
         else
         if (ZombieStateMachine.targetReached) {
+            Debug.Log("target reached returning alert from pursuit");
             return (AIStateType.Alerted);
         }
 

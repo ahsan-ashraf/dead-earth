@@ -68,6 +68,7 @@ public class AIZombieState_Patrol1 : AIZombieState {
                 
                 if (1.0f - ZombieStateMachine.satisfaction > ZombieStateMachine.VisualThreat.distance / ZombieStateMachine.sensorRadius) {
                     ZombieStateMachine.SetTarget(ZombieStateMachine.VisualThreat);
+                    Debug.Log("Food found returning pursuit state");
                     return (AIStateType.Pursuit);
                 }
             }
