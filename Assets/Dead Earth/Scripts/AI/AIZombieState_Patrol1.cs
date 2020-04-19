@@ -8,9 +8,6 @@ using UnityEngine.AI;
 public class AIZombieState_Patrol1 : AIZombieState {
 
     // Inspector Assigned
-    [SerializeField] private AIWayPointNetwork  WayPointNetWrok         = null;
-    [SerializeField] private bool               RandomPatrol            = false;
-    [SerializeField] private int                CurrentWayPointIndex    = 0;
     [SerializeField] private float              TurnOnSpotThreshold     = 80.0f;
     [SerializeField] private float              SlerpSpeed              = 5.0f;
 
@@ -38,18 +35,9 @@ public class AIZombieState_Patrol1 : AIZombieState {
         ZombieStateMachine.feeding      = false;
         ZombieStateMachine.attackType   = 0;
 
-        // If current target isn't a waypoint then we need to select a waypoint 
-        // from the waypoint network and make this the new target and plot a path to it.
-        if (ZombieStateMachine.targetType != AITargetType.WayPoint) {
-            ZombieStateMachine.ClearTarget();   // Clear any previous target.
-            Debug.Log("target cleared");
-            // Do we have a valid waypoint network.
-            if (WayPointNetWrok != null && WayPointNetWrok.WayPoints.Count > 0) {
+        // Set Destination
+        ZombieStateMachine.navAgent.SetDestination(ZombieStateMachine.GetWayPointPosition(false));
 
-                // If its a random patrol then select a random index.
-                UpdateWayPoint();
-            }
-        }
         ZombieStateMachine.navAgent.isStopped = false;
     }
     /// <summary>
@@ -92,7 +80,7 @@ public class AIZombieState_Patrol1 : AIZombieState {
                 ZombieStateMachine.transform.rotation = Quaternion.Slerp(ZombieStateMachine.transform.rotation, newRotation, SlerpSpeed * Time.deltaTime);
             }
             if (ZombieStateMachine.navAgent.isPathStale || !ZombieStateMachine.navAgent.hasPath || ZombieStateMachine.navAgent.pathStatus != NavMeshPathStatus.PathComplete) {
-                UpdateWayPoint();
+                ZombieStateMachine.GetWayPointPosition(true);
             }
             return (AIStateType.Patrol);
         }
@@ -106,7 +94,7 @@ public class AIZombieState_Patrol1 : AIZombieState {
             return;
         }
         if (ZombieStateMachine.targetType == AITargetType.WayPoint) {
-            UpdateWayPoint();
+            ZombieStateMachine.GetWayPointPosition(true);
         }
     }
     /// <summary>
@@ -121,25 +109,4 @@ public class AIZombieState_Patrol1 : AIZombieState {
         ZombieStateMachine.animator.SetLookAtWeight(0.55f);
     }
     */
-    /// <summary>
-    /// Called to select a new waypoint. Either randomly selects a new waypoint from the waypoint network or increments the current
-    /// waypoint index (with wrap-around) to visit the waypoints in the network in sequence. Sets the new waypoint as the the
-    /// target and generates a nav agent path for it.
-    /// </summary>
-    private void UpdateWayPoint() {
-        // If its a random patrol then select a random index.
-        if (RandomPatrol && WayPointNetWrok.WayPoints.Count > 1) {
-            int oldWayPoint = CurrentWayPointIndex;
-            while (CurrentWayPointIndex == oldWayPoint) {
-                CurrentWayPointIndex = Random.Range(0, WayPointNetWrok.WayPoints.Count);
-            }
-        } else {
-            CurrentWayPointIndex = CurrentWayPointIndex == WayPointNetWrok.WayPoints.Count - 1 ? 0 : CurrentWayPointIndex + 1;
-        }
-        Transform newWaypoint = WayPointNetWrok.WayPoints[CurrentWayPointIndex];
-        if (newWaypoint != null) {
-            ZombieStateMachine.SetTarget(AITargetType.WayPoint, null, newWaypoint.position, Vector3.Distance(ZombieStateMachine.transform.position, newWaypoint.position));
-            ZombieStateMachine.navAgent.SetDestination(newWaypoint.position);
-        }
-    }
 }

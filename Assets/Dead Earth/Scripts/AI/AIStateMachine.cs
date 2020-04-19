@@ -46,10 +46,14 @@ public abstract class AIStateMachine : MonoBehaviour {
     protected   AITarget                            Target                  = new AITarget();
     protected   int                                 RootPositionRefCount    = 0;
     protected   int                                 RootRotationRefCount    = 0;
+    protected   bool                                TargetReached           = false;
 
-    [SerializeField] protected  AIStateType     CurrentStateType    = AIStateType.Idle;
-    [SerializeField] protected  SphereCollider  TargetTrigger       = null;
-    [SerializeField] protected  SphereCollider  SensorTrigger       = null;
+    [SerializeField] protected  AIStateType         CurrentStateType        = AIStateType.Idle;
+    [SerializeField] protected  SphereCollider      TargetTrigger           = null;
+    [SerializeField] protected  SphereCollider      SensorTrigger           = null;
+    [SerializeField] protected  AIWayPointNetwork   WayPointNetWrok         = null;
+    [SerializeField] protected  bool                RandomPatrol            = false;
+    [SerializeField] protected  int                 CurrentWayPointIndex    = -1;
 
     [SerializeField] [Range(0.0f, 15f)] protected float     StoppingDistance = 1.0f;
 
@@ -109,6 +113,14 @@ public abstract class AIStateMachine : MonoBehaviour {
             } else {
                 return (-1);
             }
+        }
+    }
+    public bool targetReached {
+        get {
+            return (TargetReached);
+        }
+        private set {
+            TargetReached = value;
         }
     }
     public bool inMeleeRange { get; set; }
@@ -207,6 +219,8 @@ public abstract class AIStateMachine : MonoBehaviour {
         if (Target.type != AITargetType.None) {
             Target.distance = Vector3.Distance(transform.position, Target.position);
         }
+
+        targetReached = false;
     }
     /// <summary>
     /// MonoBehavior Callback: called by physics when the AI's Main collider enters its trigger. 
@@ -217,10 +231,17 @@ public abstract class AIStateMachine : MonoBehaviour {
     protected virtual void OnTriggerEnter(Collider other) {
         if (TargetTrigger == null || other != TargetTrigger)    return;
 
+        targetReached = true;
+
         // Notify child state.
         if (CurrentState != null) {
             CurrentState.OnDestinationReached(true);
         }
+    }
+    protected virtual void OnTriggerStay(Collider other) {
+        if (TargetTrigger == null || other != TargetTrigger)    return;
+
+        targetReached = true;
     }
     /// <summary>
     /// MonoBehavior Callback: called by physics when the AI's Main collider is no longer at its
@@ -228,7 +249,9 @@ public abstract class AIStateMachine : MonoBehaviour {
     /// </summary>
     /// <param name="other"></param>
     protected virtual void OnTriggerExit(Collider other) {
-        if (TargetTrigger == null || other != TargetTrigger) return;
+        if (TargetTrigger == null || other != TargetTrigger)    return;
+
+        targetReached = false;
 
         // Notify child state.
         if (CurrentState != null) {
@@ -278,7 +301,6 @@ public abstract class AIStateMachine : MonoBehaviour {
             TargetTrigger.enabled               = true;
         }
     }
-
     /// <summary>
     /// Overloaded version of SetTarget function.
     /// </summary>
@@ -345,5 +367,38 @@ public abstract class AIStateMachine : MonoBehaviour {
     public void AddRootMotionRequest(int rootPosition, int rootRotation) {
         RootPositionRefCount += rootPosition;
         RootRotationRefCount += rootRotation;
+    }
+    public Vector3 GetWayPointPosition(bool increment) {
+        if (CurrentWayPointIndex == -1) {
+            if (RandomPatrol) {
+                CurrentWayPointIndex = Random.Range(0, WayPointNetWrok.WayPoints.Count);
+            } else {
+                CurrentWayPointIndex = 0;
+            }
+        } else if (increment) {
+            UpdateWayPoint();
+        }
+        if (WayPointNetWrok.WayPoints[CurrentWayPointIndex] != null) {
+            Transform newWayPoint = WayPointNetWrok.WayPoints[CurrentWayPointIndex];
+            SetTarget(AITargetType.WayPoint, null, newWayPoint.position, Vector3.Distance(transform.position, newWayPoint.position));
+            return (newWayPoint.position);
+        }
+        return (Vector3.zero);
+    }
+    /// <summary>
+    /// Called to select a new waypoint. Either randomly selects a new waypoint from the waypoint network or increments the current
+    /// waypoint index (with wrap-around) to visit the waypoints in the network in sequence. Sets the new waypoint as the the
+    /// target and generates a nav agent path for it.
+    /// </summary>
+    private void UpdateWayPoint() {
+        // If its a random patrol then select a random index.
+        if (RandomPatrol && WayPointNetWrok.WayPoints.Count > 1) {
+            int oldWayPoint = CurrentWayPointIndex;
+            while (CurrentWayPointIndex == oldWayPoint) {
+                CurrentWayPointIndex = Random.Range(0, WayPointNetWrok.WayPoints.Count);
+            }
+        } else {
+            CurrentWayPointIndex = CurrentWayPointIndex == WayPointNetWrok.WayPoints.Count - 1 ? 0 : CurrentWayPointIndex + 1;
+        }
     }
 }

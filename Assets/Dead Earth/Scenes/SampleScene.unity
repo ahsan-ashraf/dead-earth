@@ -33474,6 +33474,98 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731828498}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &771774453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 771774457}
+  - component: {fileID: 771774456}
+  - component: {fileID: 771774455}
+  - component: {fileID: 771774454}
+  m_Layer: 13
+  m_Name: Sphere (1)
+  m_TagString: AI Sound Emitter
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!135 &771774454
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771774453}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 20
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &771774455
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771774453}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &771774456
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771774453}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &771774457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771774453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.23, y: 0, z: 28.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &894505899
 GameObject:
   m_ObjectHideFlags: 0
@@ -33746,7 +33838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166605113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9, y: 5, z: 14.74}
+  m_LocalPosition: {x: -0.74000025, y: 0, z: 18.029999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -34209,7 +34301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1567284780
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -34283,7 +34375,7 @@ Transform:
   m_Children:
   - {fileID: 731828499}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1690017737
 GameObject:
@@ -38468,6 +38560,7 @@ GameObject:
   - component: {fileID: 8296172667976861594}
   - component: {fileID: 8296172667976861596}
   - component: {fileID: 8296172667976861595}
+  - component: {fileID: 8296172667976861597}
   m_Layer: 8
   m_Name: AI Entity
   m_TagString: Untagged
@@ -38520,6 +38613,9 @@ MonoBehaviour:
   CurrentStateType: 1
   TargetTrigger: {fileID: 374132115}
   SensorTrigger: {fileID: 982904965}
+  WayPointNetWrok: {fileID: 1279617578}
+  RandomPatrol: 0
+  CurrentWayPointIndex: -1
   StoppingDistance: 1
   FOV: 50
   Sight: 50
@@ -38554,7 +38650,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThreatAngleThreshold: 10
-  WayPointAngleThreshold: 35
+  WayPointAngleThreshold: 25
+  DirectionChangeTime: 1.5
   MaxDuration: 10
 --- !u!114 &8296172667976861596
 MonoBehaviour:
@@ -38568,12 +38665,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb2d48b1fedd1747896d5645667a787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WayPointNetWrok: {fileID: 1279617578}
-  RandomPatrol: 0
-  CurrentWayPointIndex: -1
   TurnOnSpotThreshold: 80
   SlerpSpeed: 5
+  Speed: 2
+--- !u!114 &8296172667976861597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296172667976861590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966d5303de6bddf419620a191808a9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   Speed: 3
+  SlerpSpeed: 5
+  RepathDistanceMultiplier: 0.035
+  RepathVisualMinDuration: 0.05
+  RepathVisualMaxDuration: 5
+  RepathAudioMinDuration: 0.25
+  RepathAudioMaxDuration: 5
+  MaxDuration: 40
 --- !u!4 &8471817551989373335
 Transform:
   m_ObjectHideFlags: 0

@@ -17,7 +17,6 @@ public class AIZombieState_Pursuit1 : AIZombieState {
 
     private float   Timer           = 0.0f;
     private float   RepathTimer     = 0.0f;
-    private bool    TargetReached   = false;
 
     public override AIStateType GetStateType() {
         return (AIStateType.Pursuit);
@@ -36,7 +35,6 @@ public class AIZombieState_Pursuit1 : AIZombieState {
         ZombieStateMachine.attackType   = 0;
         Timer                           = 0.0f;
         RepathTimer                     = 0.0f;
-        TargetReached                   = false;
 
         // Set Path.
         ZombieStateMachine.navAgent.SetDestination(ZombieStateMachine.targetPosition);
@@ -54,7 +52,7 @@ public class AIZombieState_Pursuit1 : AIZombieState {
             return (AIStateType.Attack);
         }
 
-        if (TargetReached) {
+        if (ZombieStateMachine.targetReached) {
             switch (ZombieStateMachine.targetType) {
                 case AITargetType.Audio:
                 case AITargetType.Visual_Light:
@@ -70,19 +68,19 @@ public class AIZombieState_Pursuit1 : AIZombieState {
         }
 
         if (!ZombieStateMachine.useRootRotation && ZombieStateMachine.targetType == AITargetType.Visual_Player && 
-            ZombieStateMachine.VisualThreat.type == AITargetType.Visual_Player && TargetReached) {
+            ZombieStateMachine.VisualThreat.type == AITargetType.Visual_Player && ZombieStateMachine.targetReached) {
             Vector3 targetPosition  = ZombieStateMachine.targetPosition;
             targetPosition.y        = ZombieStateMachine.transform.position.y;
             Quaternion newRotation  = Quaternion.LookRotation((targetPosition - ZombieStateMachine.transform.position), Vector3.up);
             ZombieStateMachine.transform.rotation = newRotation;
         }
         else
-        if (!ZombieStateMachine.useRootRotation && !TargetReached) {
+        if (!ZombieStateMachine.useRootRotation && !ZombieStateMachine.targetReached) {
             Quaternion newRotation = Quaternion.LookRotation(ZombieStateMachine.navAgent.desiredVelocity);
             ZombieStateMachine.transform.rotation = Quaternion.Slerp(ZombieStateMachine.transform.rotation, newRotation, SlerpSpeed * Time.deltaTime);
         }
         else
-        if (TargetReached) {
+        if (ZombieStateMachine.targetReached) {
             return (AIStateType.Alerted);
         }
 
@@ -107,13 +105,46 @@ public class AIZombieState_Pursuit1 : AIZombieState {
                 ZombieStateMachine.SetTarget(ZombieStateMachine.VisualThreat);
                 return (AIStateType.Alerted);
             }
-
+            else
+            if (ZombieStateMachine.targetType == AITargetType.Visual_Light) {
+                int currentId = ZombieStateMachine.targetColliderId;
+                if (currentId == ZombieStateMachine.VisualThreat.collider.GetInstanceID()) {
+                    if (Mathf.Clamp(ZombieStateMachine.VisualThreat.distance * RepathDistanceMultiplier, RepathVisualMinDuration, RepathAudioMaxDuration) < RepathTimer) {
+                        ZombieStateMachine.navAgent.SetDestination(ZombieStateMachine.VisualThreat.position);
+                        RepathTimer = 0.0f;
+                    }
+                }
+                ZombieStateMachine.navAgent.SetDestination(ZombieStateMachine.VisualThreat.position);
+                return (AIStateType.Pursuit);
+            } else {
+                ZombieStateMachine.SetTarget(ZombieStateMachine.VisualThreat);
+                return (AIStateType.Alerted);
+            }
+        }
+        else
+        if (ZombieStateMachine.AudioThreat.type == AITargetType.Audio) {
+            if (ZombieStateMachine.targetType == AITargetType.Visual_Food) {
+                ZombieStateMachine.SetTarget(ZombieStateMachine.AudioThreat);
+                return (AIStateType.Alerted);
+            }
+            else
+            if (ZombieStateMachine.targetType == AITargetType.Audio) {
+                int currentId = ZombieStateMachine.targetColliderId;
+                if (currentId == ZombieStateMachine.AudioThreat.collider.GetInstanceID()) {
+                    if (ZombieStateMachine.targetPosition != ZombieStateMachine.AudioThreat.position) {
+                        if (Mathf.Clamp(ZombieStateMachine.AudioThreat.distance * RepathDistanceMultiplier, RepathAudioMinDuration, RepathAudioMaxDuration) < RepathTimer) {
+                            ZombieStateMachine.navAgent.SetDestination(ZombieStateMachine.AudioThreat.position);
+                            RepathTimer = 0.0f;
+                        }
+                    }
+                    ZombieStateMachine.navAgent.SetDestination(ZombieStateMachine.AudioThreat.position);
+                    return (AIStateType.Pursuit);
+                } else {
+                    ZombieStateMachine.navAgent.SetDestination(ZombieStateMachine.AudioThreat.position);
+                    return (AIStateType.Alerted);
+                }
+            }
         }
         return (AIStateType.Pursuit);
-    }
-    public override void OnDestinationReached(bool isReached) {
-        if (StateMachine == null)   return;
-        base.OnDestinationReached(isReached);
-        TargetReached = isReached;
     }
 }
